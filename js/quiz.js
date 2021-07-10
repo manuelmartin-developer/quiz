@@ -60,6 +60,7 @@ let correctAnswer = randomQuestion.correctAnswer;
 //! Cambiar la logica para que inserte la respuesta correcta en diferentes sitios
 let allAnswers = currentAnswers.unshift(correctAnswer);
 
+
 // Painting Question in HTML
 question.innerHTML = currentQuestion;
 
@@ -68,15 +69,29 @@ for (let i = 0; i < answers.length; i++) {
     answers[i].innerHTML = currentAnswers[i];
 
     buttons[i].addEventListener("click", function () {
-        buttons[i].get
+
         if (buttons[i].textContent === correctAnswer[0]) {
             buttons[i].style.backgroundColor = "green";
             counter.style.color = "red";
+            
+            disableButtons();
             seconds = 5
-            location.reload();
+            
         } else {
             buttons[i].style.backgroundColor = "red";
+            disableButtons();
+            seconds = 5
+            
         }
     });
 };
 
+// Disable buttons
+
+function disableButtons(){
+
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].disabled = true;
+        
+    }
+};
