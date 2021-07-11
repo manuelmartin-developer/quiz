@@ -1,18 +1,3 @@
-/******************* COUNTER *****************/
-
-const counter = document.querySelector("#counter");
-let seconds = 30;
-
-const run = () => {
-    if (seconds != 0) {
-        seconds--;
-    } else if (seconds === 0) {
-        location.reload()
-    }
-    counter.innerHTML = seconds;
-};
-setInterval(run, 1000);
-
 /******************* QUESTIONS OBJECT *****************/
 const questions = [
     {
@@ -48,6 +33,75 @@ const questions = [
 
 ];
 
+/*******************  INDEX PAGE *******************/
+const categories = document.querySelectorAll(".category");
+let currentCategory = "";
+
+for (let i = 0; i < categories.length; i++) {
+    categories[i].addEventListener("click", function () {
+        currentCategory = categories[i].value;
+        setCategory();
+    });
+}
+
+
+function setCategory() {
+
+    if (typeof (Storage) !== undefined) {
+        sessionStorage.setItem("category", currentCategory);
+    } else {
+        console.log("Tu browser no acepta webStorage :(");
+    }
+};
+/******************* COUNTER *****************/
+
+let counter = document.querySelector("#counter");
+if (document.title == "Quiz") {
+
+    counter.innerHTML = "Time: 30"
+};
+let seconds = 30;
+// Basic counter that reload every second
+const run = () => {
+    if (seconds != 0) {
+        seconds--;
+    } else if (seconds === 0) {
+        location.reload()
+    }
+    if (document.title == "Quiz") {
+
+        counter.innerHTML = `Time: ${seconds}`;
+    };
+};
+
+setInterval(run, 1000);
+
+/******************* SCORE *****************/
+let score = document.querySelector("#score");
+if (document.title == "Quiz") {
+
+    score.innerHTML = "Score: 0"
+};
+let currentScore = 0;
+// Score is storage in sessionStorage
+const scoreSessionStorage = sessionStorage.getItem("score");
+if (scoreSessionStorage !== null) {
+
+    score.innerHTML = `Score: ${sessionStorage.getItem("score")}`;
+};
+
+
+function setScore() {
+
+    if (typeof (Storage) !== undefined) {
+        currentScore = sessionStorage.getItem("score");
+        currentScore++;
+        sessionStorage.setItem("score", currentScore);
+    } else {
+        score.innerHTML = "Tu browser no acepta webStorage :(";
+    }
+};
+
 // Selecting DOM Objects
 const question = document.querySelector("#question");
 const answers = document.querySelectorAll(".answer")
@@ -64,37 +118,55 @@ let allAnswers = currentAnswers.concat(correctAnswer);
 allAnswers = allAnswers.sort(() => Math.random() - 0.5);
 
 // Painting Question in HTML
-question.innerHTML = currentQuestion;
+if (document.title == "Quiz") {
+
+    question.innerHTML = currentQuestion;
+};
 
 // Painting Answers in HTML
 for (let i = 0; i < answers.length; i++) {
     answers[i].innerHTML = allAnswers[i];
+    let currentButton = buttons[i];
+    currentButton.addEventListener("click", function () {
 
-    buttons[i].addEventListener("click", function () {
-
-        if (buttons[i].textContent === correctAnswer[0]) {
-            buttons[i].style.backgroundColor = "green";
+        if (currentButton.textContent === correctAnswer[0]) {
+            currentButton.style.backgroundColor = "green";
             counter.style.color = "green";
-            
+            setScore();
+            score.innerHTML = `Score: ${currentScore}`;
+
             disableButtons();
-            seconds = 5
-            
+            hightlightCorrect()
+            seconds = 3;
+
         } else {
-            buttons[i].style.backgroundColor = "red";
+            currentButton.style.backgroundColor = "red";
             counter.style.color = "red";
             disableButtons();
-            seconds = 5
-            
+            hightlightCorrect();
+            seconds = 3;
         }
     });
 };
 
 // Disable buttons
 
-function disableButtons(){
+function disableButtons() {
 
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].disabled = true;
-        
+        buttons[i].style.webkitFilter = "blur(4px)"
+        buttons[i].style.boxShadow = "none";
+    }
+};
+
+// Highlight correct answer
+
+function hightlightCorrect() {
+    for (let i = 0; i < buttons.length; i++) {
+        if (buttons[i].textContent === correctAnswer[0]) {
+            buttons[i].style.webkitFilter = "blur(0px)";
+            buttons[i].style.color = "#000000";
+        };
     }
 };
