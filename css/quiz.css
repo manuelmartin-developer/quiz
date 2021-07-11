@@ -1,31 +1,45 @@
 body, html{
-    height: 100%;
+    height: 91%;
     padding: 0;
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
     background-color: #073b4c;
 }
 .quiz{
-    height: 90%;
+    height: 100%;
     margin: 0;
     display: flex;
     flex-direction: column;
     font-size: large;
     font-weight: bold;
+    overflow: hidden;
 }
 .answer, .question{
+    text-align: center;
     height: 20%;
-    width: 100%;
-    padding: 0;
     margin: 0;
     
 }
+.question{
+    width: 90%;
+    align-self: center;
+}
 
-#counter{
-    height: 10%;
+#stats{
+    width: 100%;
+    height: 20%;
     display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
+
+}
+#score, #counter{
+    
+    color: gray;
     font-size: 2rem;
+    align-self: center;
 }
 .question{
     background-color: #073b4c;
@@ -33,6 +47,8 @@ body, html{
     align-items: center;
     justify-content: center;
     text-align: center;
+    padding-left: 5px;
+    padding-right: 5px;
     color: gray;
     font-size: 1.5rem;
 }
@@ -41,34 +57,23 @@ body, html{
     -webkit-transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
     transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
     font-size: 1.4rem;
+    border: 0;
 }
 .answer:hover {
-    box-shadow: 0 0 10px 10px #F5F5F5 inset;
+    box-shadow: 0 0 10px 10px #343a40 inset;
 }
 
 .answer1{
     background-color: #118ab2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 .answer2{
     background-color: #06d6a0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 .answer3{
     background-color: #ffd166;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 .answer4{
     background-color:#ef476f ;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 /******************** MEDIA QUERIES *************/
@@ -93,7 +98,8 @@ body, html{
     .answer{
         width: 45%;
         font-size: 1.6rem;
-       
+        border-radius: 0.5em;
+        
     }
 }
 
@@ -107,16 +113,17 @@ body, html{
         flex-wrap: wrap;
         align-items: center;
         justify-content: space-evenly;
-    
+        
     }
     .question{
         height: 50%;
-        width: 93%;
+        width: 100%;
         font-size: 1.7rem;
     }
     .answer{
         width: 45%;
         font-size: 1.6rem;
+        border-radius: 0.5em;
        
     }
 }

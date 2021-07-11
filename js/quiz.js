@@ -1,7 +1,7 @@
 /******************* COUNTER *****************/
 
 const counter = document.querySelector("#counter");
-let seconds = 1000;
+let seconds = 30;
 
 const run = () => {
     if (seconds != 0) {
