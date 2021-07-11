@@ -13,6 +13,7 @@ const run = () => {
 };
 setInterval(run, 1000);
 
+/******************* QUESTIONS OBJECT *****************/
 const questions = [
     {
         id: 1,
@@ -53,32 +54,34 @@ const answers = document.querySelectorAll(".answer")
 const buttons = document.querySelectorAll(".button");
 
 // Random Question
-let randomQuestion = questions[Math.floor(Math.random() * questions.length)];
-let currentQuestion = randomQuestion.question;
-let currentAnswers = randomQuestion.incorrectAnswers;
-let correctAnswer = randomQuestion.correctAnswer;
-//! Cambiar la logica para que inserte la respuesta correcta en diferentes sitios
-let allAnswers = currentAnswers.unshift(correctAnswer);
+const randomQuestion = questions[Math.floor(Math.random() * questions.length)];
+const currentQuestion = randomQuestion.question;
+const currentAnswers = randomQuestion.incorrectAnswers;
+const correctAnswer = randomQuestion.correctAnswer;
 
+// Shuffle the correct answer
+let allAnswers = currentAnswers.concat(correctAnswer);
+allAnswers = allAnswers.sort(() => Math.random() - 0.5);
 
 // Painting Question in HTML
 question.innerHTML = currentQuestion;
 
 // Painting Answers in HTML
 for (let i = 0; i < answers.length; i++) {
-    answers[i].innerHTML = currentAnswers[i];
+    answers[i].innerHTML = allAnswers[i];
 
     buttons[i].addEventListener("click", function () {
 
         if (buttons[i].textContent === correctAnswer[0]) {
             buttons[i].style.backgroundColor = "green";
-            counter.style.color = "red";
+            counter.style.color = "green";
             
             disableButtons();
             seconds = 5
             
         } else {
             buttons[i].style.backgroundColor = "red";
+            counter.style.color = "red";
             disableButtons();
             seconds = 5
             
