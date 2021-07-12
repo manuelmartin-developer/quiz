@@ -39,7 +39,7 @@ let currentCategory = "";
 
 for (let i = 0; i < categories.length; i++) {
     categories[i].addEventListener("click", function () {
-        currentCategory = categories[i].value;
+        currentCategory = categories[i].title;
         setCategory();
     });
 }
@@ -130,8 +130,8 @@ for (let i = 0; i < answers.length; i++) {
     currentButton.addEventListener("click", function () {
 
         if (currentButton.textContent === correctAnswer[0]) {
-            currentButton.style.backgroundColor = "green";
-            counter.style.color = "green";
+            currentButton.style.backgroundColor = "#38b000";
+            counter.style.color = "#38b000";
             setScore();
             score.innerHTML = `Score: ${currentScore}`;
 
@@ -140,8 +140,8 @@ for (let i = 0; i < answers.length; i++) {
             seconds = 3;
 
         } else {
-            currentButton.style.backgroundColor = "red";
-            counter.style.color = "red";
+            currentButton.style.backgroundColor = "#e71d36";
+            counter.style.color = "#e71d36";
             disableButtons();
             hightlightCorrect();
             seconds = 3;
