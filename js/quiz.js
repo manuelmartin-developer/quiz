@@ -215,7 +215,7 @@ const questions = [
     {
         id: 30,
         category: "science",
-        question: "¿Qué es más valioso, un brillante o un diamante?",
+        question: "¿Qué es más valioso?",
         correctAnswer: ["Brillante"],
         incorrectAnswers: ["Diamante", "Oro", "Plata"]
     },
