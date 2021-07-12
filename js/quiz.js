@@ -277,6 +277,7 @@ const questions = [
 const categories = document.querySelectorAll(".category");
 let currentCategory = "";
 
+// Adding categoty at sessionStorageA
 for (let i = 0; i < categories.length; i++) {
     categories[i].addEventListener("click", function () {
         currentCategory = categories[i].title;
@@ -285,7 +286,7 @@ for (let i = 0; i < categories.length; i++) {
 }
 
 function setCategory() {
-    
+
     if (typeof (Storage) !== undefined) {
         sessionStorage.setItem("category", currentCategory);
 
@@ -302,7 +303,8 @@ if (document.title == "Quiz") {
     counter.innerHTML = "Time: 30"
 };
 let seconds = 30;
-// Basic counter that reload every second
+// Basic counter that reload every second. When time= 0, page is reload
+// and another question is show.
 const run = () => {
     if (seconds != 0) {
         seconds--;
@@ -324,9 +326,9 @@ if (document.title == "Quiz") {
     score.innerHTML = "Score: 0"
 };
 let currentScore = 0;
-// Score is storage in sessionStorage
+// Adding score at sessionStorage
 const scoreSessionStorage = sessionStorage.getItem("score");
-if (scoreSessionStorage !== null) {
+if (scoreSessionStorage !== null && document.title == "Quiz") {
 
     score.innerHTML = `Score: ${sessionStorage.getItem("score")}`;
 };
@@ -397,7 +399,7 @@ function disableButtons() {
 
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].disabled = true;
-        buttons[i].style.webkitFilter = "blur(4px)"
+        buttons[i].style.webkitFilter = "blur(6px)"
         buttons[i].style.boxShadow = "none";
     }
 };
