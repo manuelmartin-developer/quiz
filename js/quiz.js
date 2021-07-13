@@ -48,7 +48,7 @@ const questions = [
         id: 7,
         category: "geography",
         question: "¿Cuál es la capital de Indonesia?",
-        correctAnswer: ["Jakarta"],
+        correctAnswer: ["Yakarta"],
         incorrectAnswers: ["Mali", "Estambul", "Tokio"]
     },
     {
@@ -277,71 +277,69 @@ const questions = [
 const categories = document.querySelectorAll(".category");
 let currentCategory = "";
 
-// Adding categoty at sessionStorageA
-for (let i = 0; i < categories.length; i++) {
-    categories[i].addEventListener("click", function () {
-        currentCategory = categories[i].title;
+// Adding category at sessionStorage
+
+categories.forEach(category => {
+    category.addEventListener("click", () => {
+        currentCategory = category.title;
         setCategory();
     });
-}
+});
 
 function setCategory() {
-
-    if (typeof (Storage) !== undefined) {
-        sessionStorage.setItem("category", currentCategory);
-
-    } else {
-        console.log("Tu browser no acepta webStorage :(");
-    }
+    const ssPermitted = sessionStorage.setItem("category", currentCategory);
+    const ssForbidden = console.log("Tu browser no acepta webStorage :(");
+    typeof(Storage) !== undefined ? ssPermitted : ssForbidden;
+    
 };
 
 /******************* COUNTER *****************/
 
 let counter = document.querySelector("#counter");
+//Checking that page is quiz page.
 if (document.title == "Quiz") {
-
     counter.innerHTML = "Time: 30"
 };
+// Initial time
 let seconds = 30;
 // Basic counter that reload every second. When time= 0, page is reload
 // and another question is show.
 const run = () => {
-    if (seconds != 0) {
-        seconds--;
-    } else if (seconds === 0) {
-        location.reload()
-    }
-    if (document.title == "Quiz") {
 
+    seconds === 0 ? location.reload() : seconds--;
+    //Checking that page is quiz page.
+    if (document.title == "Quiz") {
         counter.innerHTML = `Time: ${seconds}`;
     };
 };
-
+// Interval of time reload
 setInterval(run, 1000);
 
 /******************* SCORE *****************/
 let score = document.querySelector("#score");
+//Checking that page is quiz page.
 if (document.title == "Quiz") {
-
     score.innerHTML = "Score: 0"
 };
+// Initial score
 let currentScore = 0;
 // Adding score at sessionStorage
 const scoreSessionStorage = sessionStorage.getItem("score");
+//Checking that page is quiz page and score is storaged
 if (scoreSessionStorage !== null && document.title == "Quiz") {
-
     score.innerHTML = `Score: ${sessionStorage.getItem("score")}`;
 };
 
 function setScore() {
 
-    if (typeof (Storage) !== undefined) {
+    const ssPermitted = () =>{
         currentScore = sessionStorage.getItem("score");
         currentScore++;
         sessionStorage.setItem("score", currentScore);
-    } else {
-        score.innerHTML = "Tu browser no acepta webStorage :(";
-    }
+    };
+    const ssForbidden = score.innerHTML = "Tu browser no acepta webStorage :(";
+    typeof(Storage) !== undefined ? ssPermitted() : ssForbidden;
+  
 };
 
 // Selecting DOM Objects
@@ -363,16 +361,16 @@ allAnswers = allAnswers.sort(() => Math.random() - 0.5);
 
 // Painting Question in HTML
 if (document.title == "Quiz") {
-
     question.innerHTML = currentQuestion;
 };
 
 // Painting Answers in HTML
+
 for (let i = 0; i < answers.length; i++) {
     answers[i].innerHTML = allAnswers[i];
     let currentButton = buttons[i];
     currentButton.addEventListener("click", function () {
-
+//! PENDING OF REFACTOR
         if (currentButton.textContent === correctAnswer[0]) {
             currentButton.style.backgroundColor = "#38b000";
             counter.style.color = "#38b000";
@@ -390,6 +388,7 @@ for (let i = 0; i < answers.length; i++) {
             hightlightCorrect();
             seconds = 3;
         }
+//! PENDING OF REFACTOR
     });
 };
 
@@ -397,20 +396,22 @@ for (let i = 0; i < answers.length; i++) {
 
 function disableButtons() {
 
-    for (let i = 0; i < buttons.length; i++) {
-        buttons[i].disabled = true;
-        buttons[i].style.webkitFilter = "blur(6px)"
-        buttons[i].style.boxShadow = "none";
+    for (let button of buttons) {
+        button.disabled = true
+        button.style.webkitFilter = "blur(6px)"
+        button.style.boxShadow = "none";
     }
 };
 
 // Highlight correct answer
 
 function hightlightCorrect() {
-    for (let i = 0; i < buttons.length; i++) {
-        if (buttons[i].textContent === correctAnswer[0]) {
-            buttons[i].style.webkitFilter = "blur(0px)";
-            buttons[i].style.color = "#000000";
+
+    for (let button of buttons){
+        if (button.textContent === correctAnswer[0]) {
+            button.style.webkitFilter = "blur(0px)";
+            button.style.color = "#000000";
         };
-    }
+    };
+
 };
