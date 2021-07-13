@@ -3,7 +3,7 @@ body, html{
     padding: 0;
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #e7e5e4;
+    background-color: #EBEBEB;
 }
 .quiz, .index-container{
     height: 100%;
@@ -25,7 +25,7 @@ body, html{
 }
 .title h1 {
     color: #131313;
-    background-color: #e7e5e4;
+    background-color: #EBEBEB;
     letter-spacing: .15em;
     text-shadow: 
       1px -1px 0 #767676, 
@@ -88,13 +88,13 @@ body, html{
 #score, #counter{
     
     color: gray;
-    font-size: 2rem;
+    font-size: 1.6rem;
     align-self: center;
 }
 .question, .title{
     width: 90%;
     align-self: center;
-    background-color: #e7e5e4;
+    background-color: #EBEBEB;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -102,17 +102,18 @@ body, html{
     padding-left: 5px;
     padding-right: 5px;
     color: gray;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
 }
 
 .answer, .category{
-    -webkit-transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
-    transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+    box-shadow: 6px 6px 20px -1px rgba(0, 0, 0, 0.15),
+        -6px -6px 20px -1px rgba(255, 255, 255, 0.7);
     font-size: 1.4rem;
     border: 0;
 }
 .answer:hover, .category:hover{
-    box-shadow: 0 0 10px 10px #343a40 inset;
+    box-shadow: inset 4px 4px 10px -1px rgba(0, 0, 0, 0.15),
+        inset -4px -4px 10px -1px rgba(255, 255, 255, 0.7);
 }
 
 .answer1, .category1{
@@ -153,18 +154,18 @@ body, html{
        
     }
     .title{
-        font-size: 2rem;
+        font-size: 1.5rem;
         align-items: flex-end;
     }
     
     .question{
         height: 50%;
         width: 93%;
-        font-size: 1.7rem;
+        font-size: 1.4rem;
     }
     .answer, .category{
         width: 45%;
-        font-size: 1.6rem;
+        font-size: 1.4rem;
         border-radius: 0.5em;
         
     }
@@ -183,13 +184,13 @@ body, html{
     }
 
     .title{
-        font-size: 3rem;
+        font-size: 1.5rem;
         align-items: center;
     }
 
     .quiz{
         height: 70%;
-        width: 70%;
+
         margin: auto;
         flex-direction: row;
         flex-wrap: wrap;
@@ -200,7 +201,7 @@ body, html{
     .question{
         height: 50%;
         width: 100%;
-        font-size: 1.7rem;
+        font-size: 1.5rem;
     }
     .answer, .category{
         width: 45%;
