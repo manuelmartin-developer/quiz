@@ -3,10 +3,9 @@ let questions;
 fetch('https://opentdb.com/api.php?amount=50&type=multiple')
     .then(response => response.json())
     .then(data => questions = data.results);
-
+    
     setTimeout(() => {
         
-    
 
 /*******************  INDEX PAGE *******************/
 const categories = document.querySelectorAll(".category");
