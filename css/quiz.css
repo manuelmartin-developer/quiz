@@ -177,7 +177,7 @@ img{
     }
     .title{
         font-size: 1.5rem;
-        align-items: flex-end;
+        align-items: center;
     }
     
     .question{

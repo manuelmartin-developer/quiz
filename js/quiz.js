@@ -12,7 +12,7 @@ const fetchQuestions = async () => {
             const categories = document.querySelectorAll(".category");
             let currentCategory = "";
 
-            // Adding category at sessionStorage
+            // Adding category at localStorage
 
             categories.forEach(category => {
                 category.addEventListener("click", () => {
@@ -22,7 +22,7 @@ const fetchQuestions = async () => {
             });
 
             function setCategory() {
-                const ssPermitted = sessionStorage.setItem("category", currentCategory);
+                const ssPermitted = localStorage.setItem("category", currentCategory);
                 const ssForbidden = console.log("Tu browser no acepta webStorage :(");
                 typeof (Storage) !== undefined ? ssPermitted : ssForbidden;
 
@@ -61,19 +61,19 @@ const fetchQuestions = async () => {
             };
             // Initial score
             let currentScore = 0;
-            // Adding score at sessionStorage
-            const scoreSessionStorage = sessionStorage.getItem("score");
+            // Adding score at localStorage
+            const scoreLocalStorage = localStorage.getItem("score");
             //Checking that page is quiz page and score is storaged
-            if (scoreSessionStorage !== null && document.title == "Quiz") {
-                score.innerHTML = `Score: ${sessionStorage.getItem("score")}`;
+            if (scoreLocalStorage !== null && document.title == "Quiz") {
+                score.innerHTML = `Score: ${localStorage.getItem("score")}`;
             };
 
             function setScore() {
 
                 const ssPermitted = () => {
-                    currentScore = sessionStorage.getItem("score");
+                    currentScore = localStorage.getItem("score");
                     currentScore++;
-                    sessionStorage.setItem("score", currentScore);
+                    localStorage.setItem("score", currentScore);
                 };
                 const ssForbidden = score.innerHTML = "Tu browser no acepta webStorage :(";
                 typeof (Storage) !== undefined ? ssPermitted() : ssForbidden;
@@ -86,7 +86,7 @@ const fetchQuestions = async () => {
             const buttons = document.querySelectorAll(".button");
 
             // Random Question
-            currentCategory = sessionStorage.getItem("category");
+            currentCategory = localStorage.getItem("category");
             const categoryQuestions = questions.filter(question => question.category.startsWith(currentCategory));
             const randomQuestion = categoryQuestions[Math.floor(Math.random() * categoryQuestions.length)];
             const currentQuestion = randomQuestion.question;
